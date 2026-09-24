@@ -1,0 +1,277 @@
+/* ==========================================================================
+   CLOUD9 WEB SOLUTIONS - ADVANCED ANIMATIONS & KINETIC SCROLL ENGINE
+   ========================================================================== */
+
+/* Keyframes: Core Ambient & Cosmic Motions */
+@keyframes floatOrb {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(40px, -50px) scale(1.15);
+  }
+  100% {
+    transform: translate(-30px, 40px) scale(0.9);
+  }
+}
+
+@keyframes pulseNeon {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+    box-shadow: 0 0 10px var(--neon-cyan);
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 1;
+    box-shadow: 0 0 22px var(--neon-cyan), 0 0 35px var(--neon-cyan);
+  }
+}
+
+@keyframes floatBadge {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(1.5deg);
+  }
+  100% {
+    transform: translateY(4px) rotate(-1.5deg);
+  }
+}
+
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes rotateOrbit {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulseCore {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 35px var(--neon-cyan), inset 0 0 15px rgba(255, 255, 255, 0.6);
+  }
+  100% {
+    transform: scale(1.12);
+    box-shadow: 0 0 65px var(--neon-cyan), 0 0 100px rgba(0, 240, 255, 0.4), inset 0 0 25px rgba(255, 255, 255, 0.9);
+  }
+}
+
+@keyframes slideInToast {
+  0% {
+    opacity: 0;
+    transform: translateX(50px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes shimmerGlow {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes cardGlowTrace {
+  0%, 100% {
+    border-color: rgba(0, 240, 255, 0.2);
+  }
+  50% {
+    border-color: rgba(157, 78, 221, 0.6);
+  }
+}
+
+@keyframes hologramScanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(1000%);
+  }
+}
+
+/* ==========================================================================
+   SCROLL-DRIVEN ANIMATIONS (Native CSS View-Timeline with Modern Fallbacks)
+   ========================================================================== */
+
+/* Modern CSS Scroll-driven entry/reveal when supported by browser */
+@media (prefers-reduced-motion: no-preference) {
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    
+    @keyframes scrollFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(60px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes scrollFadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-60px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes scrollFadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(60px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes scrollScaleGrow {
+      from {
+        opacity: 0.4;
+        transform: scale(0.85);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Apply scroll-driven animations to elements */
+    .solution-card {
+      animation: scrollFadeUp auto linear backwards;
+      animation-timeline: view();
+      animation-range: entry 10% cover 35%;
+    }
+
+    .project-card {
+      animation: scrollFadeUp auto linear backwards;
+      animation-timeline: view();
+      animation-range: entry 10% cover 35%;
+    }
+
+    .process-card {
+      animation: scrollScaleGrow auto linear backwards;
+      animation-timeline: view();
+      animation-range: entry 15% cover 40%;
+    }
+
+    .testimonial-card {
+      animation: scrollFadeUp auto linear backwards;
+      animation-timeline: view();
+      animation-range: entry 10% cover 35%;
+    }
+
+    .estimator-terminal-container {
+      animation: scrollScaleGrow auto linear backwards;
+      animation-timeline: view();
+      animation-range: entry 10% cover 40%;
+    }
+  }
+}
+
+/* IntersectionObserver Fallback Classes & Dynamic JS Animation Trigger */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-left.is-revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-right.is-revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Delay helpers for staggered reveals */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
+.delay-6 { transition-delay: 0.6s; }
+
+/* Interactive Hover 3D Tilt Utilities */
+.tilt-element {
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease-out;
+}
+
+/* Scroll Progress Bar at top of screen */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+  z-index: 1000;
+  box-shadow: 0 0 12px var(--neon-cyan);
+  transition: width 0.1s ease-out;
+}
+
+/* Ambient Scanline overlay on terminal */
+.scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.6), transparent);
+  animation: hologramScanline 4s linear infinite;
+  pointer-events: none;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
