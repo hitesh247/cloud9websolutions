@@ -63,9 +63,9 @@
         "url": "https://www.cloud9websolutions.com/",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://www.cloud9websolutions.com/logo.svg",
-          "width": 200,
-          "height": 60
+          "url": "https://www.cloud9websolutions.com/images/logo.png",
+          "width": 948,
+          "height": 589
         },
         "description": "Cloud9 Web Solutions is a full-service digital agency specialising in web design, SEO services, logo design, 3D WebGL experiences, and AI-powered web development.",
         "foundingDate": "2019",
@@ -221,8 +221,10 @@
   <!-- =====================================================================
        FAVICONS & PWA MANIFEST
        ===================================================================== -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%23050714'/><path d='M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z' fill='%2300F0FF'/></svg>">
-  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%23050714'/><path d='M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z' fill='%2300F0FF'/></svg>">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
 
   <!-- =====================================================================
        PERFORMANCE: RESOURCE HINTS & PRELOADS
@@ -238,6 +240,8 @@
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/dev-hero.css">
+  <link rel="stylesheet" href="css/about.css">
 
   <!-- Sitemap reference -->
   <link rel="sitemap" type="application/xml" href="/sitemap.xml">
@@ -261,16 +265,15 @@
        ========================================================================== -->
   <div class="nav-wrapper">
     <nav class="navbar" id="main-navbar">
-      <a href="#" class="nav-logo" id="logo-link">
+      <a href="#" class="nav-logo" id="logo-link" aria-label="Cloud9 Web Solutions">
         <div class="logo-symbol">
-          <svg viewBox="0 0 24 24">
-            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3z"/>
-          </svg>
+          <img src="images/logo-icon.png" alt="Cloud9 Logo" class="logo-icon-img" width="34" height="24">
         </div>
-        <div class="logo-text">CLOUD<span>9</span></div>
+        <div class="logo-text">CLOUD<span class="logo-accent">9</span><span class="logo-domain">.online</span></div>
       </a>
 
       <ul class="nav-links">
+        <li><a href="#about" class="nav-link">About Us</a></li>
         <li><a href="#solutions" class="nav-link">Solutions</a></li>
         <li><a href="#webdesign" class="nav-link">Web Design</a></li>
         <li><a href="#seoservices" class="nav-link">SEO Services</a></li>
@@ -287,10 +290,196 @@
             <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
           </svg>
         </button>
-        <a href="#contact" class="btn btn-primary btn-sm" id="nav-cta-btn">Launch Project ⚡</a>
+        <a href="#contact" class="btn btn-primary btn-sm" id="nav-cta-btn">Get Quote ⚡</a>
+        <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
       </div>
     </nav>
   </div>
+
+  <!-- Mobile Navigation Drawer & Backdrop -->
+  <div class="mobile-nav-backdrop" id="mobile-nav-backdrop"></div>
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer" aria-hidden="true">
+    <div class="mobile-nav-header">
+      <div class="mobile-nav-logo">
+        <img src="images/logo-icon.png" alt="Cloud9 Logo" width="28" height="20">
+        <span>CLOUD<span class="logo-accent">9</span>.online</span>
+      </div>
+      <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">&times;</button>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="#about" class="mobile-nav-link"><span class="m-icon">⚡</span> About Us</a></li>
+      <li><a href="#team" class="mobile-nav-link"><span class="m-icon">👥</span> Our Team</a></li>
+      <li><a href="#solutions" class="mobile-nav-link"><span class="m-icon">🚀</span> Solutions</a></li>
+      <li><a href="#webdesign" class="mobile-nav-link"><span class="m-icon">🎨</span> Web Design</a></li>
+      <li><a href="#seoservices" class="mobile-nav-link"><span class="m-icon">📈</span> SEO Services</a></li>
+      <li><a href="#logodesign" class="mobile-nav-link"><span class="m-icon">💎</span> Logo Design</a></li>
+      <li><a href="#cosmos" class="mobile-nav-link"><span class="m-icon">🪐</span> Tech Cosmos</a></li>
+      <li><a href="#showcase" class="mobile-nav-link"><span class="m-icon">🏆</span> Showcase</a></li>
+      <li><a href="#estimator" class="mobile-nav-link"><span class="m-icon">💰</span> Cost Estimator</a></li>
+      <li><a href="#reviews" class="mobile-nav-link"><span class="m-icon">⭐</span> Reviews</a></li>
+    </ul>
+    <div class="mobile-nav-footer">
+      <a href="#contact" class="btn btn-primary" style="width: 100%;">Get Quote ⚡</a>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       TOP HERO BANNER: WEB DEVELOPMENT AGENCY IN INDIA (REFERENCE DESIGN)
+       ========================================================================== -->
+  <section class="dev-agency-hero" id="top-agency-hero" aria-label="Web Development Agency in India">
+    <!-- Ambient fluid aurora background & dynamic glow mesh -->
+    <div class="fluid-glow-container" aria-hidden="true">
+      <div class="fluid-orb fluid-orb-primary"></div>
+      <div class="fluid-orb fluid-orb-accent"></div>
+      <div class="fluid-orb fluid-orb-indigo"></div>
+      <div class="fluid-mouse-spotlight"></div>
+    </div>
+
+    <div class="dev-hero-container">
+      <div class="dev-hero-grid">
+        
+        <!-- Left: Agency Content & Highlights -->
+        <div class="dev-hero-content">
+          <!-- Top Pill Badge with pulsating indicator -->
+          <div class="dev-hero-badge" data-dev-reveal>
+            <span class="badge-dot" aria-hidden="true"></span>
+            <span class="badge-text">AI-AUGMENTED · HUMAN-GOVERNED DELIVERY</span>
+          </div>
+
+          <!-- Main Impact Title -->
+          <h1 class="dev-hero-title" data-dev-reveal>
+            Web Development<br>
+            Agency in India
+          </h1>
+
+          <!-- Highlight Subtitle (Lime Green) -->
+          <p class="dev-hero-subtitle" data-dev-reveal>
+            Web Development That Ships on Time. Every Time.
+          </p>
+
+          <!-- Checked Value Propositions -->
+          <ul class="dev-checklist" data-dev-reveal>
+            <li class="dev-check-item">
+              <span class="check-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </span>
+              <span class="check-text">Your Brand, Our Execution</span>
+            </li>
+            <li class="dev-check-item">
+              <span class="check-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </span>
+              <span class="check-text">Marketing, Design, Engineering &amp; Analytics</span>
+            </li>
+            <li class="dev-check-item">
+              <span class="check-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </span>
+              <span class="check-text">Delivering since 2004</span>
+            </li>
+            <li class="dev-check-item">
+              <span class="check-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </span>
+              <span class="check-text">Reply within four business hours (typical)</span>
+            </li>
+          </ul>
+
+          <!-- Action CTA Button matching reference image -->
+          <div class="dev-hero-cta" data-dev-reveal>
+            <a href="#contact" class="btn-dev-contact" id="dev-contact-btn" aria-label="Contact Cloud9 Web Solutions">
+              <span class="btn-text">Contact Us</span>
+              <span class="btn-arrow-bubble" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Developer Visual with Fluid Lighting & 3D Interactive Tilt -->
+        <div class="dev-hero-visual" data-dev-reveal>
+          <div class="dev-image-card" id="dev-interactive-card">
+            <div class="dev-image-wrapper">
+              <img src="images/hero-dev-banner.jpg" alt="Senior Web Developer Engineering at Cloud9 Web Solutions" class="dev-person-img" loading="eager" fetchpriority="high">
+              <!-- Fluid dark gradient overlay for cinematic edge blending -->
+              <div class="dev-image-gradient" aria-hidden="true"></div>
+            </div>
+
+            <!-- Floating Cyber Tech Badges with fluid animation -->
+            <div class="dev-float-pill float-pill-top">
+              <span class="float-pulse"></span>
+              <span class="float-text">Live Sprint · 100% On-Time Delivery</span>
+            </div>
+            
+            <div class="dev-float-pill float-pill-bottom">
+              <span class="float-icon">⚡</span>
+              <span class="float-text">Senior Dedicated Engineering Squad</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Capability Strip Cards (from reference image bottom row) -->
+      <div class="dev-bottom-strip" data-dev-reveal>
+        <div class="strip-card active">
+          <div class="strip-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+          </div>
+          <div class="strip-info">
+            <span class="strip-title">Full-Cycle Web Development</span>
+            <span class="strip-desc">React, Next.js, Node &amp; Cloud Native Architecture</span>
+          </div>
+        </div>
+
+        <div class="strip-card">
+          <div class="strip-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          </div>
+          <div class="strip-info">
+            <span class="strip-title">4,500+ Projects Delivered</span>
+            <span class="strip-desc">Direct for Global Brands &amp; White-Label for Agencies</span>
+          </div>
+        </div>
+
+        <div class="strip-card">
+          <div class="strip-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          </div>
+          <div class="strip-info">
+            <span class="strip-title">4-Hour Response SLA</span>
+            <span class="strip-desc">Written, Itemised Plan Before Any Work Begins</span>
+          </div>
+        </div>
+
+        <div class="strip-card">
+          <div class="strip-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <div class="strip-info">
+            <span class="strip-title">Confidential &amp; Protected</span>
+            <span class="strip-desc">Enforceable NDA &amp; 100% Full Codebase Ownership</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
   <!-- ==========================================================================
        HERO SECTION: THE CLOUD9 NEBULA DIMENSION
@@ -453,6 +642,380 @@
       <div class="marquee-item"><span>⚡ Microsecond Realtime Sync</span></div>
       <div class="marquee-item"><span>🌌 Custom GLSL Shaders</span></div>
       <div class="marquee-item"><span>📊 Enterprise SOC2 Frameworks</span></div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       ABOUT US SECTION: CLOUD9 WEB SOLUTIONS
+       - Mission & Agency Overview
+       - Leadership Profile: Hitesh Rawat (CTO)
+       - Global Reach: US, UK, Australia, India
+       - Core Services: Web Design, Web Development, SEO
+       - Call to Action
+       ========================================================================== -->
+  <section class="about-section" id="about" aria-label="About Cloud9 Web Solutions">
+    <div class="about-ambient-mesh" aria-hidden="true"></div>
+
+    <div class="about-container">
+      
+      <!-- Section Header -->
+      <div class="about-header reveal-on-scroll">
+        <div class="about-badge">
+          <span class="badge-icon" aria-hidden="true"></span>
+          <span>ABOUT CLOUD9 WEB SOLUTIONS</span>
+        </div>
+        <h2 class="about-main-title">
+          Building Digital Experiences <span class="gradient-highlight">That Drive Growth</span>
+        </h2>
+      </div>
+
+      <!-- About Us Narrative & Agency Story -->
+      <div class="about-story-grid">
+        <div class="about-story-card reveal-left">
+          <p class="about-story-lead">
+            At <strong>Cloud9 Web Solutions</strong>, we help businesses establish a powerful digital presence through modern website design, custom web development, and search engine optimization (SEO).
+          </p>
+          <p class="about-story-p">
+            Our mission is to create visually engaging, responsive, and user-friendly websites that strengthen brands, attract potential customers, and support long-term business growth.
+          </p>
+          <p class="about-story-p">
+            We work with businesses across the United States, United Kingdom, Australia, and India, delivering digital solutions tailored to different industries, audiences, and business objectives.
+          </p>
+          <p class="about-story-p">
+            From professional business websites and corporate platforms to custom development and SEO solutions, we combine creativity, technology, and strategic thinking to deliver websites that look exceptional and perform effectively.
+          </p>
+          <p class="about-story-p">
+            We believe a website should do more than simply exist online. It should communicate your brand's value, build trust with your audience, and turn visitors into meaningful business opportunities.
+          </p>
+        </div>
+
+        <div class="about-stats-panel reveal-right">
+          <div class="about-pillar-item">
+            <div class="about-pillar-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                <path d="M2 12h20"></path>
+              </svg>
+            </div>
+            <div>
+              <div class="about-pillar-title">International Client Focus</div>
+              <div class="about-pillar-desc">Serving growing businesses across the US, UK, Australia, and India with tailored digital solutions.</div>
+            </div>
+          </div>
+
+          <div class="about-pillar-item">
+            <div class="about-pillar-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16.5 9.4 7.55 4.24a1.78 1.78 0 0 0-2.5 1.55v12.42a1.78 1.78 0 0 0 2.5 1.55L16.5 14.6a1.78 1.78 0 0 0 0-3.2z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+            </div>
+            <div>
+              <div class="about-pillar-title">Modern Web Engineering</div>
+              <div class="about-pillar-desc">Clean, maintainable code architectures engineered for speed, mobile responsiveness, and high conversion.</div>
+            </div>
+          </div>
+
+          <div class="about-pillar-item">
+            <div class="about-pillar-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+                <line x1="12" y1="9" x2="12" y2="13"></line>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+            </div>
+            <div>
+              <div class="about-pillar-title">Brand Value &amp; Trust</div>
+              <div class="about-pillar-desc">Transforming online visitors into qualified business opportunities through credibility-first design.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leadership Profile: Hitesh Rawat (CTO) -->
+      <div class="leadership-wrapper">
+        <div class="leadership-header reveal-on-scroll">
+          <div class="about-badge">
+            <span class="badge-icon" aria-hidden="true"></span>
+            <span>LEADERSHIP</span>
+          </div>
+          <h3 class="section-title">Leadership <span class="gradient-text">Vision</span></h3>
+        </div>
+
+        <div class="leadership-card reveal-on-scroll">
+          <div class="leadership-ambient-glow" aria-hidden="true"></div>
+
+          <!-- Column 1: Portrait Placeholder (Replace images/hitesh-rawat-cto.jpg with actual photograph) -->
+          <div class="portrait-col">
+            <div class="portrait-frame">
+              <!-- Professional portrait placeholder: replace images/hitesh-rawat-cto.jpg with actual photograph -->
+              <img 
+                src="images/hitesh-rawat-cto.jpg" 
+                alt="Hitesh Rawat - Chief Technology Officer (CTO) at Cloud9 Web Solutions" 
+                class="portrait-img"
+                width="420"
+                height="560"
+                loading="lazy"
+              >
+              <div class="portrait-gradient-overlay" aria-hidden="true"></div>
+              <div class="portrait-role-badge">
+                <div>
+                  <div class="portrait-role-title">Hitesh Rawat</div>
+                  <div class="portrait-role-company">Cloud9 Web Solutions</div>
+                </div>
+                <div class="portrait-status-dot" title="Active CTO" aria-label="Active status"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: Profile Content & Biography -->
+          <div class="profile-content">
+            <div class="profile-designation-badge">Leadership Profile</div>
+            <h4 class="profile-name">Hitesh Rawat</h4>
+            <div class="profile-title-sub">Chief Technology Officer (CTO)</div>
+
+            <p class="profile-bio-text">
+              <strong>Hitesh Rawat</strong> leads the technology and development vision at Cloud9 Web Solutions, focusing on building modern, functional, and performance-oriented digital experiences.
+            </p>
+            <p class="profile-bio-text">
+              With a passion for web technologies, creative problem-solving, and digital innovation, he focuses on combining thoughtful design with reliable development to create websites that meet real business needs.
+            </p>
+            <p class="profile-bio-text">
+              His approach emphasizes responsive web design, user experience, website performance, maintainable development, and SEO-friendly implementation. Through an international client-focused approach serving businesses in the US, UK, Australia, and India, he aims to deliver tailored digital solutions aligned with each client's goals.
+            </p>
+            <p class="profile-bio-text">
+              His vision is to help businesses establish a credible online presence through effective design, dependable technology, and continuous digital improvement.
+            </p>
+
+            <div class="profile-focus-tags">
+              <span class="focus-tag">⚡ Responsive Web Design</span>
+              <span class="focus-tag">🚀 Website Performance</span>
+              <span class="focus-tag">🛠️ Maintainable Development</span>
+              <span class="focus-tag">🔍 SEO-Friendly Implementation</span>
+              <span class="focus-tag">🌐 Global Client Solutions</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team Showcase: Ideas · Design · Code · Grow -->
+      <div class="team-showcase-wrapper" id="team">
+        <div class="team-showcase-header reveal-on-scroll">
+          <div class="about-badge">
+            <span class="badge-icon" aria-hidden="true"></span>
+            <span>THE CLOUD9 TEAM</span>
+          </div>
+          <h3 class="section-title">The Minds Behind <span class="gradient-text">Cloud9 Web Solutions</span></h3>
+          <p class="section-subtitle">
+            Ideas · Design · Code · Grow — A multidisciplinary squad of web architects, UI/UX designers, full-stack engineers, and SEO specialists collaborating to deliver exceptional digital experiences.
+          </p>
+        </div>
+
+        <div class="team-showcase-card reveal-on-scroll">
+          <div class="team-ambient-glow" aria-hidden="true"></div>
+          
+          <div class="team-photo-wrapper">
+            <img 
+              src="images/cloud9-team.jpg" 
+              alt="Cloud9 Web Solutions Core Engineering & Design Team - Ideas Design Code Grow" 
+              class="team-photo-img"
+              width="1200"
+              height="750"
+              loading="lazy"
+            >
+            <div class="team-floating-badge">
+              <span class="team-status-dot" aria-hidden="true"></span>
+              <span>Cloud9 Web Solutions · Dedicated Squad</span>
+            </div>
+          </div>
+
+          <div class="team-details-footer">
+            <div class="team-tagline-motto">
+              <span>Ideas</span> · <span class="accent">Design</span> · <span>Code</span> · <span class="accent">Grow</span>
+            </div>
+            <div class="team-skills-pills">
+              <span class="team-skill-pill">⚡ Full-Stack Engineering</span>
+              <span class="team-skill-pill">🎨 Bespoke UI/UX Design</span>
+              <span class="team-skill-pill">🔍 Algorithmic SEO</span>
+              <span class="team-skill-pill">🌐 Global Delivery Hub</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Global Reach Section -->
+      <div class="global-reach-wrapper">
+        <div class="global-reach-header reveal-on-scroll">
+          <div class="about-badge">
+            <span class="badge-icon" aria-hidden="true"></span>
+            <span>GLOBAL REACH</span>
+          </div>
+          <h3 class="section-title">Connecting Businesses to the <span class="gradient-text">Digital World</span></h3>
+          <p class="section-subtitle">
+            Delivering tailored digital solutions aligned with market requirements and international audience behaviors.
+          </p>
+        </div>
+
+        <div class="global-markets-grid">
+          <!-- United States -->
+          <div class="market-card reveal-on-scroll">
+            <div class="market-icon-wrap" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
+            <h4 class="market-country-name">United States</h4>
+            <div class="market-label-sub">Market Served</div>
+            <p class="market-meta-desc">Delivering high-performance corporate platforms, SaaS experiences, and modern brand websites for American enterprises and startups.</p>
+          </div>
+
+          <!-- United Kingdom -->
+          <div class="market-card reveal-on-scroll">
+            <div class="market-icon-wrap" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
+            <h4 class="market-country-name">United Kingdom</h4>
+            <div class="market-label-sub">Market Served</div>
+            <p class="market-meta-desc">Crafting refined, conversion-focused digital platforms for UK businesses seeking distinct brand authority and competitive advantage.</p>
+          </div>
+
+          <!-- Australia -->
+          <div class="market-card reveal-on-scroll">
+            <div class="market-icon-wrap" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
+            <h4 class="market-country-name">Australia</h4>
+            <div class="market-label-sub">Market Served</div>
+            <p class="market-meta-desc">Building rapid, mobile-optimized web presences and scalable architectures for forward-thinking Australian businesses.</p>
+          </div>
+
+          <!-- India -->
+          <div class="market-card reveal-on-scroll">
+            <div class="market-icon-wrap" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
+            <h4 class="market-country-name">India</h4>
+            <div class="market-label-sub">Market Served</div>
+            <p class="market-meta-desc">Partnering with ambitious founders, tech ventures, and established companies across India with full-cycle web design and engineering.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Our Core Services -->
+      <div class="about-services-wrapper">
+        <div class="about-services-header reveal-on-scroll">
+          <div class="about-badge">
+            <span class="badge-icon" aria-hidden="true"></span>
+            <span>CAPABILITIES</span>
+          </div>
+          <h3 class="section-title">Our Core <span class="gradient-text">Services</span></h3>
+          <p class="section-subtitle">
+            Combining creativity, technology, and strategic thinking to deliver websites that look exceptional and perform effectively.
+          </p>
+        </div>
+
+        <div class="about-services-grid">
+          <!-- Web Design -->
+          <div class="about-service-card reveal-on-scroll">
+            <div class="service-icon-container" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                <path d="M3 9h18"></path>
+                <path d="M9 21V9"></path>
+              </svg>
+            </div>
+            <h4 class="service-card-title">Web Design</h4>
+            <p class="service-card-desc">
+              Modern, responsive, visually compelling websites designed to communicate your brand and deliver excellent user experiences.
+            </p>
+            <a href="#webdesign" class="service-card-link">
+              <span>Explore Web Design</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Web Development -->
+          <div class="about-service-card reveal-on-scroll">
+            <div class="service-icon-container" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+            </div>
+            <h4 class="service-card-title">Web Development</h4>
+            <p class="service-card-desc">
+              Reliable, scalable website development tailored to your business requirements and functional goals.
+            </p>
+            <a href="#solutions" class="service-card-link">
+              <span>Explore Web Development</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Search Engine Optimization (SEO) -->
+          <div class="about-service-card reveal-on-scroll">
+            <div class="service-icon-container" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+            </div>
+            <h4 class="service-card-title">Search Engine Optimization (SEO)</h4>
+            <p class="service-card-desc">
+              SEO-focused website structure and optimization practices designed to support search visibility and organic growth.
+            </p>
+            <a href="#seoservices" class="service-card-link">
+              <span>Explore SEO Services</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Closing Call to Action -->
+      <div class="about-cta-wrapper reveal-on-scroll">
+        <div class="about-cta-content">
+          <h3 class="about-cta-title">Ready to Build Your Digital Presence?</h3>
+          <p class="about-cta-desc">
+            Let's discuss your project and create a website that reflects your brand, engages your audience, and supports your business goals.
+          </p>
+          <div class="about-cta-buttons">
+            <a href="#contact" class="btn btn-primary" id="about-cta-primary-btn">
+              <span>Start Your Project</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="#solutions" class="btn btn-cta-secondary" id="about-cta-secondary-btn">
+              <span>Explore Our Services</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -1879,14 +2442,9 @@
       <div class="footer-grid">
         
         <div>
-          <div class="nav-logo" style="margin-bottom: 1rem;">
-            <div class="logo-symbol">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="#050714">
-                <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
-              </svg>
-            </div>
-            <div class="logo-text">CLOUD<span>9</span></div>
-          </div>
+          <a href="#" class="footer-logo" aria-label="Cloud9 Web Solutions">
+            <img src="images/logo-white-text.png" alt="Cloud9 Web Solutions - Web Design, Development, SEO" class="footer-logo-img" width="230" height="143">
+          </a>
           <p class="footer-brand-desc">
             Architects of next-generation digital universes. We engineer 3D spatial experiences, ultra-fast web platforms, and autonomous AI agents for visionary brands worldwide.
           </p>
@@ -1909,6 +2467,7 @@
         <div>
           <h4 class="footer-heading">Navigation</h4>
           <ul class="footer-links">
+            <li><a href="#about" class="footer-link">About Cloud9</a></li>
             <li><a href="#hero" class="footer-link">Nebula Hero</a></li>
             <li><a href="#webdesign" class="footer-link">Web Design Studio</a></li>
             <li><a href="#seoservices" class="footer-link">SEO Vitals Scanner</a></li>
@@ -2115,5 +2674,6 @@
   <script src="js/cosmos-orbit.js"></script>
   <script src="js/scroll-effects.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/dev-hero.js"></script>
 </body>
 </html>

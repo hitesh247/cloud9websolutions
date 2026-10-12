@@ -135,7 +135,7 @@ class ScrollEffectsEngine {
   }
 
   init3DTilt() {
-    const cards = document.querySelectorAll('.holo-card-3d, .solution-card, .project-card, .testimonial-card, .review-card, .webdesign-card, .seo-pillar-card, .logo-card');
+    const cards = document.querySelectorAll('.holo-card-3d, .solution-card, .project-card, .testimonial-card, .review-card, .webdesign-card, .seo-pillar-card, .logo-card, .about-story-card, .market-card, .about-service-card, .leadership-card, .team-showcase-card');
     cards.forEach(card => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();

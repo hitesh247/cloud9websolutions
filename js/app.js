@@ -1033,6 +1033,208 @@ function initModalCloseHandlers() {
 }
 
 // ==========================================================================
+// 10. INDUSTRY VERTICALS FILTER ENGINE
+// ==========================================================================
+function initVerticalsFilter() {
+  const pills = document.querySelectorAll('.vertical-filter-pill');
+  const cards = document.querySelectorAll('.vertical-card');
+
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+
+      const filter = pill.getAttribute('data-filter') || 'all';
+
+      cards.forEach(card => {
+        const category = card.getAttribute('data-category') || 'all';
+        if (filter === 'all' || category === filter || category.includes(filter)) {
+          card.style.display = 'flex';
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(15px)';
+          setTimeout(() => {
+            card.style.transition = 'all 0.35s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 30);
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (window.cloud9Audio) window.cloud9Audio.playTone(720, 0.05, 'sine');
+    });
+  });
+}
+
+// ==========================================================================
+// 11. MOBILE APP DEVELOPMENT INTERACTIVE SIMULATOR
+// ==========================================================================
+function initAppDevSimulator() {
+  const switchBtns = document.querySelectorAll('.app-switch-btn');
+  const appTitle = document.getElementById('phone-app-title-text');
+  const appContent = document.getElementById('phone-app-content-body');
+
+  const appData = {
+    rideshare: {
+      title: 'Voyager Taxi ⚡',
+      html: `
+        <div class="phone-card-widget" style="background: linear-gradient(135deg, rgba(0,240,255,0.1), rgba(121,40,202,0.15));">
+          <div style="font-size:0.75rem; color:var(--neon-cyan); font-weight:700; margin-bottom:4px;">RIDE STATUS: EN ROUTE</div>
+          <div style="font-size:1.1rem; font-weight:800; color:#fff;">Tesla Model S Cyber</div>
+          <div style="font-size:0.8rem; color:var(--text-secondary); margin-top:2px;">Driver: Alex K. ★ 4.99 • ETA 3 mins</div>
+        </div>
+        <div class="phone-card-widget">
+          <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+            <span style="font-size:0.82rem; color:var(--text-secondary);">Pickup Location</span>
+            <span style="font-size:0.82rem; color:#fff; font-weight:600;">San Francisco Bay HQ</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:0.82rem; color:var(--text-secondary);">Destination</span>
+            <span style="font-size:0.82rem; color:var(--neon-cyan); font-weight:600;">Silicon Valley Airport</span>
+          </div>
+        </div>
+        <div style="margin-top:auto; padding-top:10px;">
+          <button class="btn btn-primary btn-sm w-100" style="width:100%; border-radius:12px;" onclick="if(window.showToast) showToast('Live Driver Telemetry Tracking Connected 📡');">Live GPS Telemetry</button>
+        </div>
+      `
+    },
+    fintech: {
+      title: 'Apex Credit Pro 💳',
+      html: `
+        <div class="phone-card-widget" style="background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,100,0,0.1));">
+          <div style="font-size:0.75rem; color:#FFD700; font-weight:700; margin-bottom:4px;">CREDIT LINE APPROVED</div>
+          <div style="font-size:1.35rem; font-weight:800; color:#fff;">$85,000.00</div>
+          <div style="font-size:0.8rem; color:var(--text-secondary); margin-top:2px;">Instant Disbursement Available</div>
+        </div>
+        <div class="phone-card-widget">
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+            <span style="font-size:0.82rem; color:var(--text-secondary);">Interest APR</span>
+            <span style="font-size:0.82rem; color:#00F0FF; font-weight:700;">4.85% Fixed</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+            <span style="font-size:0.82rem; color:var(--text-secondary);">Repayment Term</span>
+            <span style="font-size:0.82rem; color:#fff;">36 Months</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:0.82rem; color:var(--text-secondary);">KYC Verification</span>
+            <span style="font-size:0.82rem; color:#00FF88; font-weight:700;">✓ Verified</span>
+          </div>
+        </div>
+        <div style="margin-top:auto; padding-top:10px;">
+          <button class="btn btn-primary btn-sm w-100" style="width:100%; border-radius:12px; background:linear-gradient(135deg, #FFD700, #FF8000); color:#050714;" onclick="if(window.showToast) showToast('Instant $85,000 Disbursement Initiated ⚡');">Transfer To Bank</button>
+        </div>
+      `
+    },
+    health: {
+      title: 'Medix Telehealth 🩺',
+      html: `
+        <div class="phone-card-widget" style="background: linear-gradient(135deg, rgba(0,255,136,0.12), rgba(0,162,255,0.12));">
+          <div style="font-size:0.75rem; color:#00FF88; font-weight:700; margin-bottom:4px;">UPCOMING CONSULTATION</div>
+          <div style="font-size:1.1rem; font-weight:800; color:#fff;">Dr. Elena Rostova, MD</div>
+          <div style="font-size:0.8rem; color:var(--text-secondary); margin-top:2px;">Senior Cardiologist & Surgeon</div>
+        </div>
+        <div class="phone-card-widget">
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+            <span style="font-size:0.82rem; color:var(--text-secondary);">Appointment Date</span>
+            <span style="font-size:0.82rem; color:#fff; font-weight:600;">Today @ 4:30 PM</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:0.82rem; color:var(--text-secondary);">Video Room ID</span>
+            <span style="font-size:0.82rem; color:var(--neon-cyan); font-family:var(--font-mono);">#MDX-9942-SEC</span>
+          </div>
+        </div>
+        <div style="margin-top:auto; padding-top:10px;">
+          <button class="btn btn-primary btn-sm w-100" style="width:100%; border-radius:12px; background:linear-gradient(135deg, #00FF88, #0080FF);" onclick="if(window.showToast) showToast('Joining Encrypted HD Telemedicine Room 🎥');">Join Video Call</button>
+        </div>
+      `
+    },
+    doorstep: {
+      title: 'QuickServ Express 📦',
+      html: `
+        <div class="phone-card-widget" style="background: linear-gradient(135deg, rgba(121,40,202,0.15), rgba(0,240,255,0.1));">
+          <div style="font-size:0.75rem; color:#00F0FF; font-weight:700; margin-bottom:4px;">DOORSTEP SERVICE SCHEDULED</div>
+          <div style="font-size:1.1rem; font-weight:800; color:#fff;">Laundry & Dryclean Pickup</div>
+          <div style="font-size:0.8rem; color:var(--text-secondary); margin-top:2px;">3 Bags • Express 24h Turnaround</div>
+        </div>
+        <div class="phone-card-widget">
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+            <span style="font-size:0.82rem; color:var(--text-secondary);">Pickup Agent</span>
+            <span style="font-size:0.82rem; color:#fff; font-weight:600;">Vikram S. (ID #408)</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="font-size:0.82rem; color:var(--text-secondary);">Slot Time</span>
+            <span style="font-size:0.82rem; color:var(--neon-cyan); font-weight:700;">6:00 PM - 7:00 PM</span>
+          </div>
+        </div>
+        <div style="margin-top:auto; padding-top:10px;">
+          <button class="btn btn-primary btn-sm w-100" style="width:100%; border-radius:12px;" onclick="if(window.showToast) showToast('Pickup Confirmed! Doorstep Agent Dispatched 🚀');">Confirm Pickup</button>
+        </div>
+      `
+    }
+  };
+
+  switchBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      switchBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const appKey = btn.getAttribute('data-app') || 'rideshare';
+      const data = appData[appKey];
+
+      if (data && appTitle && appContent) {
+        appTitle.textContent = data.title;
+        appContent.innerHTML = data.html;
+        if (window.cloud9Audio) window.cloud9Audio.playTone(600, 0.06, 'triangle');
+      }
+    });
+  });
+}
+
+// ==========================================================================
+// 12. FREQUENTLY ASKED QUESTIONS (FAQ) ACCORDION ENGINE
+// ==========================================================================
+function initFaqAccordion() {
+  const faqItems = document.querySelectorAll('.faq-item');
+  const searchInput = document.getElementById('faq-search-input');
+
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    if (question) {
+      question.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        
+        // Close others for clean accordion experience
+        faqItems.forEach(other => {
+          if (other !== item) other.classList.remove('active');
+        });
+
+        if (isActive) {
+          item.classList.remove('active');
+        } else {
+          item.classList.add('active');
+          if (window.cloud9Audio) window.cloud9Audio.playTone(550, 0.04, 'sine');
+        }
+      });
+    }
+  });
+
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      const term = e.target.value.toLowerCase().trim();
+      faqItems.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        if (text.includes(term) || term === '') {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  }
+}
+
+// ==========================================================================
 // INITIALIZATION ON DOM READY
 // ==========================================================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -1046,6 +1248,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initBrandStudioArchetypes();
   initContactTerminal();
   initModalCloseHandlers();
+  
+  // New Enhanced Features
+  initVerticalsFilter();
+  initAppDevSimulator();
+  initFaqAccordion();
 
   // Run Global Clocks
   updateGlobalClocks();
@@ -1064,4 +1271,67 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // Mobile Navigation Drawer Toggle Handler
+  const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+  const mobileNavDrawer = document.getElementById('mobile-nav-drawer');
+  const mobileNavBackdrop = document.getElementById('mobile-nav-backdrop');
+  const mobileNavClose = document.getElementById('mobile-nav-close');
+
+  function openMobileNav() {
+    if (mobileNavDrawer && mobileNavBackdrop) {
+      mobileNavDrawer.classList.add('open');
+      mobileNavBackdrop.classList.add('open');
+      mobileNavDrawer.setAttribute('aria-hidden', 'false');
+      if (mobileMenuToggle) {
+        mobileMenuToggle.classList.add('active');
+        mobileMenuToggle.setAttribute('aria-expanded', 'true');
+      }
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeMobileNav() {
+    if (mobileNavDrawer && mobileNavBackdrop) {
+      mobileNavDrawer.classList.remove('open');
+      mobileNavBackdrop.classList.remove('open');
+      mobileNavDrawer.setAttribute('aria-hidden', 'true');
+      if (mobileMenuToggle) {
+        mobileMenuToggle.classList.remove('active');
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+      }
+      document.body.style.overflow = '';
+    }
+  }
+
+  if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (mobileNavDrawer && mobileNavDrawer.classList.contains('open')) {
+        closeMobileNav();
+      } else {
+        openMobileNav();
+      }
+    });
+  }
+
+  if (mobileNavClose) {
+    mobileNavClose.addEventListener('click', closeMobileNav);
+  }
+
+  if (mobileNavBackdrop) {
+    mobileNavBackdrop.addEventListener('click', closeMobileNav);
+  }
+
+  document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      closeMobileNav();
+    });
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMobileNav();
+  });
 });
+
+
